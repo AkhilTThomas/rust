@@ -139,7 +139,8 @@ test = true
 level = "warn"
 check-cfg = [
     'cfg(bootstrap)',
-    'cfg(target_arch, values("xtensa"))',
+    # #[cfg(bootstrap)] NEW_TARGET_ARCH
+    'cfg(target_arch, values("xtensa", "x86_64-pc-nto-qnx800"))',
     # std use #[path] imports to portable-simd `std_float` crate
     # and to the `backtrace` crate which messes-up with Cargo list
     # of declared features, we therefor expect any feature cfg

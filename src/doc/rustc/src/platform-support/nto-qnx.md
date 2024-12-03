@@ -109,6 +109,7 @@ For conditional compilation, following QNX Neutrino specific attributes are defi
 - `target_os` = `"nto"`
 - `target_env` = `"nto71"` (for QNX Neutrino 7.1)
 - `target_env` = `"nto70"` (for QNX Neutrino 7.0)
+- `target_env` = `"nto80"` (for QNX Neutrino 8.0)
 
 ## Building the target
 

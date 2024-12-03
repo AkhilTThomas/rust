@@ -214,8 +214,8 @@ fn file_test_io_seek_and_write() {
 fn file_lock_multiple_shared() {
     let tmpdir = tmpdir();
     let filename = &tmpdir.join("file_lock_multiple_shared_test.txt");
-    let f1 = check!(File::create(filename));
-    let f2 = check!(OpenOptions::new().write(true).open(filename));
+    let f1 = check!(OpenOptions::new().read(true).write(true).create(true).open(filename));
+    let f2 = check!(OpenOptions::new().read(true).write(true).open(filename));
 
     // Check that we can acquire concurrent shared locks
     check!(f1.lock_shared());
@@ -237,8 +237,8 @@ fn file_lock_multiple_shared() {
 fn file_lock_blocking() {
     let tmpdir = tmpdir();
     let filename = &tmpdir.join("file_lock_blocking_test.txt");
-    let f1 = check!(File::create(filename));
-    let f2 = check!(OpenOptions::new().write(true).open(filename));
+    let f1 = check!(OpenOptions::new().read(true).write(true).create(true).open(filename));
+    let f2 = check!(OpenOptions::new().read(true).write(true).open(filename));
 
     // Check that shared locks block exclusive locks
     check!(f1.lock_shared());
@@ -261,8 +261,8 @@ fn file_lock_blocking() {
 fn file_lock_drop() {
     let tmpdir = tmpdir();
     let filename = &tmpdir.join("file_lock_dup_test.txt");
-    let f1 = check!(File::create(filename));
-    let f2 = check!(OpenOptions::new().write(true).open(filename));
+    let f1 = check!(OpenOptions::new().read(true).write(true).create(true).open(filename));
+    let f2 = check!(OpenOptions::new().read(true).write(true).open(filename));
 
     // Check that locks are released when the File is dropped
     check!(f1.lock_shared());
@@ -282,8 +282,8 @@ fn file_lock_drop() {
 fn file_lock_dup() {
     let tmpdir = tmpdir();
     let filename = &tmpdir.join("file_lock_dup_test.txt");
-    let f1 = check!(File::create(filename));
-    let f2 = check!(OpenOptions::new().write(true).open(filename));
+    let f1 = check!(OpenOptions::new().read(true).write(true).create(true).open(filename));
+    let f2 = check!(OpenOptions::new().read(true).write(true).open(filename));
 
     // Check that locks are not dropped if the File has been cloned
     check!(f1.lock_shared());
